@@ -1,0 +1,52 @@
+﻿<Window x:Class="PhotoOrganiser.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:models="clr-namespace:PhotoOrganiser.Models"
+        mc:Ignorable="d"
+        Title="Simple Photo Shooting Date Organizer" Height="122" Width="511" MinHeight="122" MinWidth="511">
+    <Window.DataContext>
+        <models:MainWindowsMvvm/>
+    </Window.DataContext>
+    <Grid Margin="5,5,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" MinHeight="75" />
+            <RowDefinition Height="*" MinHeight="25" />
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Header="Loaction and files extension" Margin="0,0,0,5" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="75" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" VerticalContentAlignment="Center">Folder:</Label>
+                <Label Grid.Row="1" Grid.Column="0" VerticalContentAlignment="Center">Mask:</Label>
+
+                <TextBox Grid.Row="0" Grid.Column="1" MaxLines="1" Height="25" VerticalContentAlignment="Center" AcceptsReturn="False" TextWrapping="NoWrap" Text="{Binding Folder}" />
+                <Button Grid.Row="0" Grid.Column="2" Width=" 25" VerticalContentAlignment="Center" Command="{Binding ChoiceFolder}">
+                    <Button.Content>...</Button.Content>
+                </Button>
+                <ComboBox 
+                    Grid.Row="1" 
+                    Grid.Column="1" 
+                    VerticalContentAlignment="Center" 
+                    IsEditable="True"
+                    ItemsSource="{Binding Items}"
+                    SelectedItem="{Binding SelectedItem}"
+                    />
+            </Grid>
+        </GroupBox>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button HorizontalAlignment="Right" x:Name="btnOK" Content="OK" VerticalAlignment="Top" Width="75" Command="{Binding FormOK}"/>
+            <Button HorizontalAlignment="Right" x:Name="btnCancel" Content="Cancel" VerticalAlignment="Top" Width="75"/>
+        </StackPanel>
+    </Grid>
+</Window>
